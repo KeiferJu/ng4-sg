@@ -1,0 +1,21 @@
+<!--标题-->
+<h2>联系人表</h2>
+<!--操作按钮-->
+<div>
+  <button  class="btn btn-default" (click)="addData()">添加</button>
+  <button  [disabled]="!isValidForm_d()" class="btn btn-default" (click)="deletData()">删除</button>
+  <button  [disabled]="!isValidForm_u()" class="btn btn-default" (click)="updateData()">修改</button>
+</div>
+<!--表格-->
+<table [id]="tableId" class="table table-bordered">
+    <thead ng2-st-thead *ngIf="!isHideHeader || !isHideSubHeader" [grid]="grid" [isAllSelected]="isAllSelected" [source]="source" [createConfirm]="createConfirm" (create)="create.emit($event)" (selectAllRows)="onSelectAllRows($event)" (sort)="sort($event)"
+        (filter)="filter($event)">
+    </thead>
+
+    <tbody ng2-st-tbody [grid]="grid" [source]="source" [deleteConfirm]="deleteConfirm" [editConfirm]="editConfirm" [rowClassFunction]="rowClassFunction" (edit)="edit.emit($event)" (delete)="delete.emit($event)" (custom)="custom.emit($event)" (userSelectRow)="onUserSelectRow($event)"
+        (editRowSelect)="editRowSelect($event)" (multipleSelectRow)="multipleSelectRow($event)" (rowHover)="onRowHover($event)">
+    </tbody>
+
+</table>
+<!--分页-->
+<ng2-smart-table-pager *ngIf="isPagerDisplay" [source]="source" (changePage)="changePage($event)"></ng2-smart-table-pager>

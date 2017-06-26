@@ -1,0 +1,100 @@
+<div style="height: 100%;">
+  <div class="home jumbotron centered" style="display: none;">
+    <h1>Welcome to the angular2 authentication sample!</h1>
+    <h2 *ngIf="jwt">Your JWT is:</h2>
+    <pre *ngIf="jwt" class="jwt"><code>{{ jwt }}</code></pre>
+    <pre *ngIf="jwt" class="jwt"><code>{{ decodedJwt | json }}</code></pre>
+    <p>Click any of the buttons to call an API and get a response</p>
+    <p><a class="btn btn-primary btn-lg" role="button" (click)="callAnonymousApi()">Call Anonymous API</a></p>
+    <p><a class="btn btn-primary btn-lg" role="button" (click)="callSecuredApi()">Call Secure API</a></p>
+    <p><a class="btn btn-primary btn-lg" role="button" (click)="logout()">Logout</a></p>
+    <h2 *ngIf="response">The response of calling the <span class="red">{{ api }}</span> API is:</h2>
+    <h3 *ngIf="response">{{ response }}</h3>
+  </div>
+
+  <div mouseWheel  (mouseWheelUp)="resetWindowLeft($event)" (mouseWheelDown)="resetWindowLeft($event)" class="tile-area fg-white tile-area-scheme-lightOrange"  [ngClass]="{'tile-ng-first': true}"
+       [ngStyle]="{'width': getWinWidth() + 'px'}"
+       style="overflow-y: hidden;height: 100%; max-height: 100% !important; background: url('../../assets/2.jpg')">
+    <h1 class="tile-area-title">Start</h1>
+
+    <div class="tile-area-controls">
+      <button class="image-button icon-right bg-transparent fg-white bg-hover-dark no-border"><span
+        class="sub-header no-margin text-light" style="color: #000;">用户名</span> <span class="mif-cog icon glyphicon glyphicon-user" style="color: #000;"></span>
+      </button>
+     <!-- <button class="square-button bg-transparent fg-white bg-hover-dark no-border"
+              onclick="showCharms('#charmSearch')"><span class="mif-search"></span></button>-->
+      <button class="square-button bg-transparent fg-white bg-hover-dark no-border"
+              onclick="showCharms('#charmSettings')"><span class="mif-cog glyphicon glyphicon-asterisk" style="color: #000;"></span></button>
+      <a href="javascript:;" (click)="logout()"
+         class="square-button bg-transparent bg-hover-dark no-border">
+        <span class="mif-cog glyphicon glyphicon-off" style="color: #000;"></span>
+      </a>
+    </div>
+
+    <!--<div class="tile-group double" style="left: 0px;">
+      <span class="tile-group-title">General</span>
+
+      <div class="tile-container">
+
+        <a href="http://calendar.google.com/" class="tile bg-indigo fg-white" data-role="tile"
+           style="opacity: 1; transform: scale(1); transition: 0.3s;">
+          <div class="tile-content iconic">
+            <span class="icon mif-calendar"></span>
+          </div>
+          <span class="tile-label">Calendar</span>
+        </a>
+
+        <div class="tile bg-darkBlue fg-white" data-role="tile"
+             onclick="document.location.href='http://gmail.com'"
+             style="opacity: 1; transform: scale(1); transition: 0.3s;">
+          <div class="tile-content iconic">
+            <span class="icon mif-envelop"></span>
+          </div>
+          <span class="tile-label">Inbox</span>
+        </div>
+
+        <div class="tile-large bg-steel fg-white" data-role="tile"
+             data-on-click="document.location.href=&#39;http://forecast.io&#39;"
+             style="opacity: 1; transform: scale(1); transition: 0.3s;">
+          <div class="tile-content" id="weather_bg"
+               style="background: top left no-repeat; background-size: cover">
+            <div class="padding10">
+              <h1 id="weather_icon" style="font-size: 6em;position: absolute; top: 10px; right: 10px;"></h1>
+
+              <h1 id="city_temp"></h1>
+
+              <h2 id="city_name" class="text-light"></h2>
+              <h4 id="city_weather"></h4>
+
+              <p id="city_weather_daily"></p>
+
+              <p class="no-margin text-shadow">Pressure: <span class="text-bold" id="pressure"></span> mm</p>
+
+              <p class="no-margin text-shadow">Ozone: <span class="text-bold" id="ozone"></span></p>
+
+              <p class="no-margin text-shadow">Wind bearing: <span class="text-bold" id="wind_bearing"></span>
+              </p>
+
+              <p class="no-margin text-shadow">Wind speed: <span class="text-bold" id="wind_speed">0</span>
+                m/s</p>
+            </div>
+          </div>
+          <span class="tile-label">Weather</span>
+        </div>
+      </div>
+    </div>-->
+    <div *ngFor="let tileBox of classModule"
+         class="tile-group" [ngStyle]="{'max-width': tileBox.width * 80 + 'px'}" style="left: 0;">
+      <span class="tile-group-title">{{tileBox.name}}</span>
+
+      <div class="tile-container">
+        <div *ngFor="let tile of tileBox.child" class="tile bg-white fg-white"
+             draggable="true"
+             [ngStyle]="{'width': tile.width * 80 - 10 + 'px','height': tile.height * 80 - 10 + 'px'}"
+             style="opacity: 1; transform: scale(1); transition: 0.3s;">
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
